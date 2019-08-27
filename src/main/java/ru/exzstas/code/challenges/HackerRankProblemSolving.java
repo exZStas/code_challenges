@@ -7,7 +7,7 @@ import java.util.List;
 public class HackerRankProblemSolving {
 
     public static void main(String[] args) {
-        countApplesAndOranges(7, 11, 5, 15, new int[] {-2, 2, 1}, new int[] {5, -6});
+        System.out.println(kangaroo(0,3,4,2));
     }
 
     //https://www.hackerrank.com/challenges/grading/problem
@@ -49,5 +49,42 @@ public class HackerRankProblemSolving {
 
         System.out.println(appleRes);
         System.out.print(orangeRes);
+    }
+
+    //https://www.hackerrank.com/challenges/kangaroo/problem
+    public static String kangaroo(int x1, int v1, int x2, int v2) {
+        final String yes = "YES";
+        final String no = "NO";
+
+        if((x1 > x2 && v1 > v2) || (x2 > x1 && v2 > v1)) {
+            return no;
+        }
+
+        if(x1 == x2 && v1 == v2) {
+            return yes;
+        }
+
+        // x1 + nv1 = x2 + nv2
+        //n(v1 - v2) = x2 - x1
+        //n = (x2 - x1) / (v1 - v2)
+
+        int x = x2 - x1;
+        int v = v1 - v2;
+
+        if(v == 0 || x == 0) {
+            return no;
+        }
+
+        int n = x / v;
+
+        if(n < 0) {
+            return no;
+        } else {
+            //check if kangaroos land in the same place
+            if((x1 + n*v1) == (x2 + n*v2)) {
+                return yes;
+            }
+            return no;
+        }
     }
 }
